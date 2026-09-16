@@ -15,7 +15,7 @@ The topics we will cover are:
 * [ ] **Lab 2:** Camera Calibration
 * [ ] **Lab 3:** Image processing and Features Extraction
 * [ ] **Lab 4:** Features Extraction & Bag of Visual Words
-* [ ] **Lab 5:** Motion Detection, and Object Tracking
+* [ ] **Lab 5:** Motion Detection and Object Tracking
 * [ ] **Project:** Final Project
 
 Each structured session is designed to be completed in 2 hours in the lab. The additional, non-guided questions we propose in the lab manual are intended as homework to be done outside of class time.
