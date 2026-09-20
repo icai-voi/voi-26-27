@@ -14,7 +14,8 @@ The topics we will cover are:
 * [ ] **Lab 1:** Introduction to OpenCV and Color Spaces 
 * [ ] **Lab 2:** Camera Calibration
 * [ ] **Lab 3:** Image processing and Features Extraction
-* [ ] **Lab 4:** Bag of Visual Words, Motion Detection, and Object Tracking
+* [ ] **Lab 4:** Features Extraction & Bag of Visual Words
+* [ ] **Lab 5:** Motion Detection and Object Tracking
 * [ ] **Project:** Final Project
 
 Each structured session is designed to be completed in 2 hours in the lab. The additional, non-guided questions we propose in the lab manual are intended as homework to be done outside of class time.
@@ -82,7 +83,7 @@ If you spot a typo or notice a mistake, feel free to reach out or submit a pull 
 
 ## Get in Touch
 
-If you have suggestions for exercises or want to share your thoughts, feel free to contact us at iderodrigo@comillas.edu. Also, if you find this repository helpful, we would appreciate it if you could give it a star.
+If you have suggestions for exercises or want to share your thoughts, feel free to contact us. Also, if you find this repository helpful, we would appreciate it if you could give it a star.
 
 
 <h2 align="center">Let's start!</h2>
