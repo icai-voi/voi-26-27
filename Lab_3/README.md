@@ -1,8 +1,7 @@
 <a href="https://x.com/nearcyan/status/1706914605262684394">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="assets/features-extraction-dark.png">
-    <source media="(prefers-color-scheme: light)" srcset="assets/features-extraction-light.png">
-    <img alt="Lab Session Image" src="assets/features-extraction-light.png">
+    <source media="(prefers-color-scheme: dark)" srcset="assets/image-processing-dark.png">
+    <img alt="Lab Session Image" src="assets/image-processing-dark.png">
   </picture>
 </a>
 
@@ -16,7 +15,7 @@ This laboratory session contains the following:
 
 - 📄 **``CVI_lab_3.pdf``**: A ``PDF`` guide with instructions to complete the session (currently only available in Spanish).
 - 💻 **Scripts**: Three ``.ipynb`` files (one per part: Corner Detection, Edge Detection, and SIFT and Bag of Words). The folder also includes multiple helper scripts.
-- 🎞️ **Data**: A folder containing images to process. Notice that you should place and uncompress the ``dataset.zip`` file to complete Part C.
+- 🎞️ **Data**: A folder containing images to process.
 - 📝 **Template**: A folder with a ``latex`` template used to generate the guide. You can reuse it to write your report.
 - 🧩 **Assets**: Files to style or improve documentation.
 - 📖 **README**: With links to motivate the session or to introduce the theory concepts.
@@ -28,22 +27,13 @@ The lab session folder is structured as follows:
 ├── CVI_lab_3.pdf
 ├── src
 │   ├── partA-B.ipynb
-│   ├── partC.ipynb
-│   ├── partD.ipynb
-│   ├── partE.ipynb
-│   ├── bow.py
-│   ├── dataset.py
-│   ├── image_classifier.py
-│   ├── results.py
 │   └── utils.py
 ├── data
 │   └── partA-B
 │     ├── 000.png
 │     ├── 001.png
 │     ├── ...
-│   └── partC-D-E
-│     ├── football.png
-├──   ...
+|     ...
 ├── assets
 ├── template
 └── README
