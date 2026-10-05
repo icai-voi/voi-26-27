@@ -121,3 +121,8 @@ Añada ruido a las imágenes de la carpeta \texttt{data}. Compare los resultados
 \begin{tcolorbox}[colback=gray!10, colframe=gray!30, coltitle=black, title=Pregunta A.2, halign=left]
 Utilice la librería \texttt{scikit-image} y compare el efecto de los filtros Sobel, Canny y Prewitt sobre las imágenes de la carpeta \texttt{data}. ¿Qué diferencias observa entre los filtros? ¿Puede obtener alguna conclusión y/o patrón?
 \end{tcolorbox}
+
+\vspace{5mm}
+\begin{tcolorbox}[colback=gray!10, colframe=gray!30, coltitle=black, title=Pregunta A.3, halign=left]
+Añada ruido impulsivo (``sal y pimienta'') a una imagen de la carpeta \texttt{data}, corrompiendo un 5\% de sus píxeles (fije su valor a 0 o a 255 de forma aleatoria). Aplique sobre la imagen ruidosa un filtro Gausiano (\texttt{cv2.GaussianBlur()}) y un filtro de mediana (\texttt{cv2.medianBlur()}), ambos con el mismo tamaño de kernel. Compare los resultados con la imagen original y explique por qué se comportan de forma distinta. ¿Qué ocurriría si aumentase el tamaño del kernel o el porcentaje de píxeles corrompidos?
+\end{tcolorbox}
