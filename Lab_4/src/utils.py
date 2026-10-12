@@ -272,7 +272,8 @@ def generateDescriptors(keypoints, gaussian_images, window_width=4, num_bins=8, 
 
 MIN_MATCH_COUNT = 10
 
-def matchFeatures(img1,kp1,des1,img2,kp2,des2):
+def drawFeatureMatches(img1,kp1,des1,img2,kp2,des2):
+    """Return an RGB image with both images side by side and the SIFT matches drawn (None if not enough matches)"""
     # Initialize and use FLANN
     FLANN_INDEX_KDTREE = 0
     index_params = dict(algorithm = FLANN_INDEX_KDTREE, trees = 5)
@@ -320,10 +321,24 @@ def matchFeatures(img1,kp1,des1,img2,kp2,des2):
             pt2 = (int(kp2[m.trainIdx].pt[0] + w1), int(kp2[m.trainIdx].pt[1]))
             cv2.line(newimg, pt1, pt2, (255, 0, 0))
 
-        plt.imshow(newimg)
-        plt.show()
+        return newimg
     else:
         print("Not enough matches are found - %d/%d" % (len(good), MIN_MATCH_COUNT))
+        return None
+
+def matchFeatures(img1,kp1,des1,img2,kp2,des2):
+    newimg = drawFeatureMatches(img1, kp1, des1, img2, kp2, des2)
+    if newimg is not None:
+        plt.imshow(newimg)
+        plt.show()
+
+def matchFeatures_and_save(img1,kp1,des1,img2,kp2,des2,save_path):
+    """Same as matchFeatures(), but also saves the result in save_path (full file path, e.g. '.../matches.png')"""
+    newimg = drawFeatureMatches(img1, kp1, des1, img2, kp2, des2)
+    if newimg is not None:
+        cv2.imwrite(save_path, cv2.cvtColor(newimg, cv2.COLOR_RGB2BGR))
+        plt.imshow(newimg)
+        plt.show()
 
 
 def build_vocabulary(dataset: List[str], vocabulary: str = 'vocabulary', feature_type: str = 'SIFT', size: int = 100, iterations: int = 20):
