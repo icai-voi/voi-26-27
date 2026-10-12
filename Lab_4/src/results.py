@@ -95,8 +95,11 @@ class Results:
         classification_df = pd.DataFrame(classification, columns=('Image', 'Known', 'Predicted'))
 
         # Write to Excel
-        workbook = self._dataset_name.lower().replace(" ", "_") + '_' if self._dataset_name else ""
-        workbook += "results.xlsx"
+        # Only the file name is normalized: lowercasing the whole path breaks folders such as '../results/partC'
+        # on case-sensitive file systems (Linux)
+        folder, name = os.path.split(self._dataset_name)
+        workbook = name.lower().replace(" ", "_") + '_' if name else ""
+        workbook = os.path.join(folder, workbook + "results.xlsx")
 
         with pd.ExcelWriter(workbook) as writer:
             confusion_df.to_excel(writer, sheet_name='Confusion matrix', index_label='KNOWN/PREDICTED')
