@@ -13,8 +13,8 @@ The topics we will cover are:
 
 * [ ] **Lab 1:** Introduction to OpenCV and Color Spaces 
 * [ ] **Lab 2:** Camera Calibration
-* [ ] **Lab 3:** Image processing and Features Extraction
-* [ ] **Lab 4:** Features Extraction & Bag of Visual Words
+* [ ] **Lab 3:** Image Processing
+* [ ] **Lab 4:** Features Extraction: Corners, Straight Lines and SIFT
 * [ ] **Lab 5:** Motion Detection and Object Tracking
 * [ ] **Project:** Final Project
 
