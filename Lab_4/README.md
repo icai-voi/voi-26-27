@@ -14,8 +14,8 @@
 This laboratory session contains the following:
 
 - 📄 **``CVI_lab_4.pdf``**: A ``PDF`` guide with instructions to complete the session (currently only available in Spanish).
-- 💻 **Scripts**: Three ``.ipynb`` files (one per part: Corner Detection, Straight Line Detection, and SIFT and Bag of Words). The folder also includes multiple helper scripts.
-- 🎞️ **Data**: A folder containing images to process. Notice that you should download the ``dataset.zip`` file from Moodle and uncompress it inside ``data/partC`` to complete the Bag of Words section of Part C.
+- 💻 **Scripts**: Three ``.ipynb`` files (one per part: Corner Detection, Straight Line Detection, and SIFT). The folder also includes a helper script (``utils.py``).
+- 🎞️ **Data**: A folder containing images to process.
 - 📝 **Template**: A folder with a ``latex`` template used to generate the guide. You can reuse it to write your report.
 - 🧩 **Assets**: Files to style or improve documentation.
 - 📖 **README**: With links to motivate the session or to introduce the theory concepts.
@@ -29,10 +29,6 @@ The lab session folder is structured as follows:
 │   ├── partA.ipynb
 │   ├── partB.ipynb
 │   ├── partC.ipynb
-│   ├── bow.py
-│   ├── dataset.py
-│   ├── image_classifier.py
-│   ├── results.py
 │   └── utils.py
 ├── data
 │   ├── partA-B
@@ -42,8 +38,7 @@ The lab session folder is structured as follows:
 │   │   └── tennis.png
 │   └── partC
 │       ├── 0.jpg
-│       ├── 0_rot.jpg
-│       └── dataset (download from Moodle)
+│       └── 0_rot.jpg
 ├── assets
 ├── template
 └── README

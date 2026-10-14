@@ -1,7 +1,7 @@
-\chapter{Apartado C: \textbf{Detección de puntos de interés y bolsa de palabras}}
+\chapter{Apartado C: \textbf{Detección de puntos de interés}}
 \label{chapter:tarea_c}
 
-En este apartado deberá extraer los puntos de interés de la imagen \texttt{data/partC/0.jpg}. Una vez hecho, podrá comprobar la correspondencia con esa misma imagen girada (\texttt{data/partC/0\_rot.jpg}) y la relación entre ambas (Figura \ref{fig:feat_match}). Tras entender el funcionamiento de este método, pasará a construir una bolsa de palabras a partir de un \textit{dataset} de entrenamiento y a generar predicciones para un \textit{dataset} de validación. El código se desarrolla en el notebook \texttt{partC.ipynb}.
+En este apartado deberá extraer los puntos de interés de la imagen \texttt{data/partC/0.jpg}. Una vez hecho, podrá comprobar la correspondencia con esa misma imagen girada (\texttt{data/partC/0\_rot.jpg}) y la relación entre ambas (Figura \ref{fig:feat_match}). El código se desarrolla en el notebook \texttt{partC.ipynb}.
 
 \begin{figure}[h]
     \centering
@@ -10,17 +10,7 @@ En este apartado deberá extraer los puntos de interés de la imagen \texttt{dat
     \label{fig:feat_match}
 \end{figure}
 
-\section*{Tarea PREVIA: Creación de las carpetas de resultados}
-\phantomsection
-\addcontentsline{toc}{section}{Tarea PREVIA: Creación de las carpetas de resultados}
-
-Cree la carpeta \texttt{../results/partC} con las subcarpetas \texttt{bow} y \texttt{feature\_extraction}. Dentro de esta última, cree las subcarpetas \texttt{0\_gaussians}, \texttt{1\_difference\_of\_gaussians}, \texttt{2\_match\_features} y \texttt{3\_SIFT}.
-
-\section*{C.1: Detección de puntos de interés}
-\phantomsection
-\addcontentsline{toc}{section}{C.1: Detección de puntos de interés}
-
-En esta sección se desarrollarán las funciones necesarias para detectar los puntos de interés y calcular sus descriptores empleando la transformación SIFT. La transformación SIFT consta de cuatro pasos principales:
+A lo largo del apartado se desarrollarán las funciones necesarias para detectar los puntos de interés y calcular sus descriptores empleando la transformación SIFT. La transformación SIFT consta de cuatro pasos principales:
 
 \begin{enumerate}
     \item Detección de extremos en el espacio de escalas.
@@ -31,19 +21,25 @@ En esta sección se desarrollarán las funciones necesarias para detectar los pu
 
 Cada uno se irá desarrollando con las funciones necesarias para completarlo. Se comenzará generando el espacio de escalas en el que se buscarán los extremos.
 
-\subsection*{Tarea C.1.1: Generar función de filtro gaussiano}
+\section*{Tarea PREVIA: Creación de las carpetas de resultados}
 \phantomsection
-\addcontentsline{toc}{subsection}{Tarea C.1.1: Generar función de filtro gaussiano}
+\addcontentsline{toc}{section}{Tarea PREVIA: Creación de las carpetas de resultados}
+
+Cree la carpeta \texttt{../results/partC} con la subcarpeta \texttt{feature\_extraction}. Dentro de esta última, cree las subcarpetas \texttt{0\_gaussians}, \texttt{1\_difference\_of\_gaussians}, \texttt{2\_match\_features} y \texttt{3\_SIFT}.
+
+\section*{Tarea C.1: Generar función de filtro gaussiano}
+\phantomsection
+\addcontentsline{toc}{section}{Tarea C.1: Generar función de filtro gaussiano}
 
 Para generar el espacio de escalas que se desea analizar, se debe aplicar un filtrado gaussiano a la imagen original hasta obtener un número de imágenes gaussianas relevante. Para ello, debe desarrollar la función \texttt{generateGaussianImages()} empleando el método \texttt{cv2.GaussianBlur()} \footnote{ \href{https://docs.opencv.org/3.4/d4/d86/group\_\_imgproc\_\_filter.html\#gaabe8c836e97159a9193fb0b11ac52cf1}{Documentación del método \texttt{cv2.GaussianBlur()} en OpenCV:} \\{https://docs.opencv.org/3.4/d4/d86/group\_\_imgproc\_\_filter.html\#gaabe8c836e97159a9193fb0b11ac52cf1}} de la librería OpenCV.
 
 Como entrada, se recibe una imagen y una lista de sigmas que deberá aplicar en el filtrado. Deberá generar tantas imágenes gaussianas como sigmas haya en la lista, aplicando cada filtro al resultado del filtrado anterior (y a la imagen original en el primer caso).
 
-\subsection*{Tarea C.1.2: Generación de espacio de escalas con imágenes gaussianas}
+\section*{Tarea C.2: Generación de espacio de escalas con imágenes gaussianas}
 \phantomsection
-\addcontentsline{toc}{subsection}{Tarea C.1.2: Generación de espacio de escalas con imágenes gaussianas}
+\addcontentsline{toc}{section}{Tarea C.2: Generación de espacio de escalas con imágenes gaussianas}
 
-Deberá cargar la imagen base (\texttt{data/partC/0.jpg}) con cv2 y en escala de grises, sin emplear la función \texttt{cv2.cvtColor()}. A continuación se definen los parámetros iniciales del espacio de escalas: la \textit{sigma} inicial y el número de diferencias de gaussianas que se desea generar (\texttt{intervals}). Aunque el mínimo de diferencias necesarias para detectar los máximos y mínimos en ventanas de 3x3x3 es 3, con ese valor el refinamiento de la localización (Tarea C.1.5) descarta todos los puntos de interés de esta imagen; por eso el notebook usa \texttt{intervals = 5}. Por último, emplee el método \texttt{generateGaussianImages()} que ha desarrollado en la tarea anterior.
+Deberá cargar la imagen base (\texttt{data/partC/0.jpg}) con cv2 y en escala de grises, sin emplear la función \texttt{cv2.cvtColor()}. A continuación se definen los parámetros iniciales del espacio de escalas: la \textit{sigma} inicial y el número de diferencias de gaussianas que se desea generar (\texttt{intervals}). Aunque el mínimo de diferencias necesarias para detectar los máximos y mínimos en ventanas de 3x3x3 es 3, con ese valor el refinamiento de la localización (Tarea C.5) descarta todos los puntos de interés de esta imagen; por eso el notebook usa \texttt{intervals = 5}. Por último, emplee el método \texttt{generateGaussianImages()} que ha desarrollado en la tarea anterior.
 
 Como puede observar en el código, se le proporciona el método \texttt{generateGaussianSigmas()}, que recibe la \textit{sigma} inicial y el número de diferencias de gaussianas que desea generar. Este método devuelve la lista de valores de \textit{sigma} que deberá aplicar en los filtrados consecutivos: si quiere generar \textit{n} diferencias de gaussianas, le devolverá \textit{n+1} valores de sigma. La Figura \ref{fig:gauss_blur} muestra el resultado esperado de esta tarea.
 
@@ -54,9 +50,9 @@ Como puede observar en el código, se le proporciona el método \texttt{generate
     \label{fig:gauss_blur}
 \end{figure}
 
-\subsection*{Tarea C.1.3: Generación de diferencias de gaussianas}
+\section*{Tarea C.3: Generación de diferencias de gaussianas}
 \phantomsection
-\addcontentsline{toc}{subsection}{Tarea C.1.3: Generación de diferencias de gaussianas}
+\addcontentsline{toc}{section}{Tarea C.3: Generación de diferencias de gaussianas}
 
 A partir de la lista de imágenes anteriores, se deberá generar una nueva lista con las diferencias entre imágenes consecutivas empleando el método \texttt{cv2.subtract()} \footnote{ \href{https://docs.opencv.org/3.4/d2/de8/group\_\_core\_\_array.html\#gaa0f00d98b4b5edeaeb7b8333b2de353b}{Documentación del método \texttt{cv2.subtract()} en OpenCV:} \\{https://docs.opencv.org/3.4/d2/de8/group\_\_core\_\_array.html\#gaa0f00d98b4b5edeaeb7b8333b2de353b}} de la librería OpenCV. La Figura \ref{fig:dog} muestra el resultado esperado de esta tarea.
 
@@ -67,15 +63,15 @@ A partir de la lista de imágenes anteriores, se deberá generar una nueva lista
     \label{fig:dog}
 \end{figure}
 
-\subsection*{Tarea C.1.4: Evaluación de extremos}
+\section*{Tarea C.4: Evaluación de extremos}
 \phantomsection
-\addcontentsline{toc}{subsection}{Tarea C.1.4: Evaluación de extremos}
+\addcontentsline{toc}{section}{Tarea C.4: Evaluación de extremos}
 
 En esta tarea debe desarrollar la función \texttt{isPixelAnExtremum()}, que evalúa si el píxel central de una ventana de 3x3x3 es un máximo o un mínimo entre sus vecinos y si supera un umbral mínimo en valor absoluto. La ventana está compuesta por 3 regiones de 3x3 píxeles, que corresponden a regiones de 3 diferencias de gaussianas consecutivas. La función debe devolver \textit{True} en caso de ser un máximo o un mínimo y \textit{False} en cualquier otro caso. \textbf{Importante:} las diferencias de gaussianas pueden tomar valores negativos.
 
-\subsection*{Tarea C.1.5: Localización de puntos clave y orientación de los mismos}
+\section*{Tarea C.5: Localización de puntos clave y orientación de los mismos}
 \phantomsection
-\addcontentsline{toc}{subsection}{Tarea C.1.5: Localización de puntos clave y orientación de los mismos}
+\addcontentsline{toc}{section}{Tarea C.5: Localización de puntos clave y orientación de los mismos}
 
 En esta tarea deberá completar la función \texttt{findScaleSpaceExtrema()}, que emplea la función de la tarea anterior.
 
@@ -94,15 +90,15 @@ Se recomienda el uso de la función de borrado de duplicados \texttt{removeDupli
 
 Una vez obtenidas las imágenes gaussianas y los puntos de interés con sus orientaciones, se pueden generar los descriptores de las regiones vecinas a estos, que son invariantes a los cambios de iluminación y de punto de vista. En esta sesión se proporciona para ello la función \texttt{generateDescriptors()}.
 
-\subsection*{Tarea C.1.6: Pipeline de generación de puntos clave y descriptores}
+\section*{Tarea C.6: Pipeline de generación de puntos clave y descriptores}
 \phantomsection
-\addcontentsline{toc}{subsection}{Tarea C.1.6: Pipeline de generación de puntos clave y descriptores}
+\addcontentsline{toc}{section}{Tarea C.6: Pipeline de generación de puntos clave y descriptores}
 
 En esta tarea deberá completar la función \texttt{computeKeypointsAndDescriptors()}. Esta función recibe la imagen original, el valor inicial de \textit{sigma} y el número de diferencias de gaussianas que se desea generar. Complétela con los métodos desarrollados en las tareas anteriores para obtener el \textit{pipeline} completo de localización de puntos de interés y generación de descriptores.
 
-\subsection*{Tarea C.1.7: Correspondencia de características entre imágenes}
+\section*{Tarea C.7: Correspondencia de características entre imágenes}
 \phantomsection
-\addcontentsline{toc}{subsection}{Tarea C.1.7: Correspondencia de características entre imágenes}
+\addcontentsline{toc}{section}{Tarea C.7: Correspondencia de características entre imágenes}
 
 En esta tarea comprobará la capacidad del sistema para localizar las mismas características en una imagen alterada y establecer la correspondencia entre las características de la imagen original y las de la alterada. Para ello, cargue la imagen original y la alterada (\texttt{0.jpg} y \texttt{0\_rot.jpg}) en escala de grises con \texttt{cv2} y haga las llamadas pertinentes al método de la tarea anterior para obtener los puntos de interés y los descriptores de ambas imágenes.
 
@@ -117,76 +113,10 @@ Con estos datos, la función \texttt{matchFeatures\_and\_save()} establece la co
 
 Una vez comprendido el funcionamiento de un detector de puntos de interés y de sus descriptores, se le anima a emplear el método propio de OpenCV, como se proporciona en el notebook (\textit{Ampliación: SIFT con OpenCV}).
 
-\subsection*{Preguntas}
-\addcontentsline{toc}{subsection}{Preguntas}
+\section*{Preguntas}
+\addcontentsline{toc}{section}{Preguntas}
 
 \vspace{5mm}
 \begin{tcolorbox}[colback=gray!10, colframe=gray!30, coltitle=black, title=Pregunta C.1: Correspondencia de imágenes propias y evaluación, halign=left]
 Con los métodos desarrollados para la extracción de características, use su \textit{pipeline} y el SIFT de OpenCV con sus propias imágenes (por ejemplo, dos fotos de un mismo objeto desde puntos de vista distintos). Adjunte los resultados de ambos y compárelos extrayendo sus propias conclusiones.
-\end{tcolorbox}
-
-\newpage
-\section*{C.2: Bolsa de palabras}
-\phantomsection
-\addcontentsline{toc}{section}{C.2: Bolsa de palabras}
-
-En esta sección se va a generar una bolsa de palabras a partir de un \textit{dataset} de entrenamiento y se evaluará con un \textit{dataset} de validación. Para generar la bolsa de palabras, se seguirán los pasos descritos en las sesiones de teoría:
-
-\begin{enumerate}
-    \item Extracción de los descriptores de los puntos de interés de las imágenes del \textit{dataset}.
-    \item Construcción del diccionario de palabras visuales (K-Means).
-    \item Para cada imagen del \textit{dataset}, generación del histograma de ocurrencias de las palabras del diccionario.
-    \item Entrenamiento de un clasificador con los histogramas de las imágenes del \textit{dataset} (SVM).
-\end{enumerate}
-
-\subsection*{Tarea C.2.1: Carga de los datasets de entrenamiento y validación para la bolsa de palabras}
-\phantomsection
-\addcontentsline{toc}{subsection}{Tarea C.2.1: Carga de los datasets de entrenamiento y validación}
-
-Descargue el \textit{dataset} desde Moodle (\texttt{dataset.zip}) y descomprímalo en \texttt{data/partC}, de forma que queden las carpetas \texttt{data/partC/dataset/training} y \texttt{data/partC/dataset/validation}. Contiene imágenes de 15 tipos de escenas (\textit{Coast}, \textit{Forest}, \textit{Kitchen}, \textit{Street}, etc.), organizadas en una carpeta por categoría.
-
-Como ayuda, se le proporciona la clase de Python \texttt{Dataset}. Empleando su método \texttt{load()}, cargue los \textit{datasets} de entrenamiento y de validación.
-
-\subsection*{Tarea C.2.2: Extracción de los descriptores}
-\phantomsection
-\addcontentsline{toc}{subsection}{Tarea C.2.2: Extracción de los descriptores}
-
-Una vez cargados los \textit{datasets}, se pueden extraer los descriptores de las imágenes que poblarán la bolsa de palabras. Para ello, cargue en escala de grises cada imagen del \textit{dataset} de entrenamiento a partir de su ruta. Después, empleando los métodos de OpenCV que ha visto durante la sesión, obtenga sus descriptores SIFT y guárdelos en una lista.
-
-\subsection*{Tarea C.2.3: Creación del vocabulario}
-\phantomsection
-\addcontentsline{toc}{subsection}{Tarea C.2.3: Creación del vocabulario}
-
-Con los descriptores extraídos, se puede proceder a agruparlos en las distintas palabras del vocabulario con el algoritmo de clusterización K-Means. Agrupar los cerca de 1.5 millones de descriptores del \textit{dataset} es lento y consume mucha memoria, así que el notebook toma una muestra aleatoria de 70 descriptores por imagen (unos 200\,000 en total), que produce un vocabulario igual de útil. En esta tarea debe añadir esa muestra a la bolsa de palabras \texttt{words} que se inicializa en el código, sobre la que se ejecutará el algoritmo. Fíjese en que el número de palabras del vocabulario se determina con la variable \texttt{vocabulary\_size}, y en que esto afectará al desempeño del clasificador más adelante. El vocabulario se guarda en \texttt{../results/partC/bow/vocabulary.pickle}.
-
-\subsection*{Tarea C.2.4: Entrenamiento del clasificador}
-\phantomsection
-\addcontentsline{toc}{subsection}{Tarea C.2.4: Entrenamiento del clasificador}
-
-Una vez agrupadas las características de las imágenes en palabras, se va a entrenar un clasificador capaz de distinguir las categorías del \textit{dataset} a partir de los histogramas de palabras de cada imagen. Será un modelo basado en una \textit{Support Vector Machine} (SVM). Con este clasificador se podrán clasificar imágenes externas al \textit{dataset} de entrenamiento.
-
-Para entrenar el clasificador se aportan dos clases como ayuda: \texttt{BoW}, que carga el vocabulario, e \texttt{ImageClassifier}, que implementa el clasificador SVM. Añada los argumentos necesarios a los métodos especificados en la celda de código; compruebe qué argumentos debe añadir consultando el código de las clases proporcionadas. El modelo final se guarda en \texttt{../results/partC/bow} para usarlo más adelante.
-
-\subsection*{Tarea C.2.5: Inferencia en dataset de entrenamiento}
-\phantomsection
-\addcontentsline{toc}{subsection}{Tarea C.2.5: Inferencia en dataset de entrenamiento}
-
-Con el modelo entrenado, es hora de comprobar su desempeño. La métrica empleada será la precisión (\textit{accuracy}) y podrá observar la matriz de confusión de las predicciones, que además se guarda en un archivo Excel en \texttt{../results/partC/bow}.
-
-Al igual que en la tarea anterior, añada los argumentos necesarios a los métodos especificados en la celda de código.
-
-\subsection*{Tarea C.2.6: Inferencia en dataset de evaluación}
-\phantomsection
-\addcontentsline{toc}{subsection}{Tarea C.2.6: Inferencia en dataset de evaluación}
-
-Después de obtener los resultados con el \textit{dataset} de entrenamiento, se deben comparar con los del \textit{dataset} de validación, con el que se debería obtener un desempeño inferior.
-
-Al igual que en la tarea anterior, añada los argumentos necesarios.
-
-\subsection*{Preguntas}
-\addcontentsline{toc}{subsection}{Preguntas}
-
-\vspace{5mm}
-\begin{tcolorbox}[colback=gray!10, colframe=gray!30, coltitle=black, title=Pregunta C.2: Búsqueda de los mejores parámetros. ¿Cuántas palabras usar?, halign=left]
-Entrene y evalúe el clasificador con vocabularios de 50, 100, 200 y 400 palabras (\texttt{vocabulary\_size}). Elija además \textbf{uno} de estos parámetros y estudie su efecto: el kernel del SVM (\texttt{setKernel()} en \texttt{image\_classifier.py}), el número de iteraciones del SVM (argumento \texttt{iterations} de \texttt{train()}) o el extractor de características (KAZE en lugar de SIFT). Muestre en una tabla la \textit{accuracy} de entrenamiento y de validación de cada prueba y justifique qué configuración elegiría.
 \end{tcolorbox}
