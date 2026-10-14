@@ -1,0 +1,63 @@
+\chapter{Sesión 4: Extracción de características}
+\label{chapter:introduction_ses_4}
+
+\section{Materiales}
+
+En esta práctica se trabajará con los siguientes recursos (puede encontrarlos en la sección de Moodle \textit{Laboratorio/Sesión 4}):
+
+\begin{itemize}
+    \item \textbf{\texttt{partA.ipynb}}: notebook con el código que deberá desarrollar en el apartado A.
+    \item \textbf{\texttt{partB.ipynb}}: notebook con el código que deberá desarrollar en el apartado B.
+    \item \textbf{\texttt{partC.ipynb}}: notebook con el código que deberá desarrollar en el apartado C.
+    \item \textbf{helpers}: el archivo \texttt{utils.py}, con funciones auxiliares del detector SIFT y de la correspondencia de características que se usan en el apartado C.
+    \item \textbf{data}: carpeta con las imágenes de trabajo (\texttt{data/partA-B} para los apartados A y B, y \texttt{data/partC} para el apartado C).
+\end{itemize}
+
+Los resultados de la práctica se guardan en la carpeta \texttt{results}, al mismo nivel que \texttt{src} y \texttt{data} (desde los notebooks, \texttt{../results}).
+
+\section{Apartados de la práctica}
+
+La Sesión 4 del laboratorio está dividida en los siguientes apartados:
+
+\begin{itemize}
+    \item Apartado A: Detección de esquinas (Harris y Shi-Tomasi).
+    \item Apartado B: Detección de líneas rectas (Canny y transformada de Hough).
+    \item Apartado C: Detección de puntos de interés (SIFT).
+\end{itemize}
+
+\section{Observaciones}
+
+Aunque el guion de la práctica y los comentarios en Markdown del Notebook estén escritos en español, observe que todo aquello que aparece en las celdas de código está escrito en inglés. Es una buena práctica que todo su código esté escrito en inglés.
+
+Aquellas partes del código que deberá completar están marcadas con la etiqueta \textbf{\texttt{TODO}}.
+
+Es muy importante que trabaje consultando la documentación de OpenCV\footnote{\href{https://docs.opencv.org/4.x/index.html}{Documentación de OpenCV}: \url{https://docs.opencv.org/4.x/index.html}} para familiarizarse de cara al examen. Tenga en cuenta que en los exámenes no podrá utilizar herramientas de ayuda como Copilot.
+
+\section{Qué va a aprender}
+
+Al finalizar esta práctica, sabrá detectar esquinas con los métodos de Harris y Shi-Tomasi, y extraer líneas rectas con la transformada de Hough. Además, comprenderá cómo funciona por dentro el detector SIFT (espacio de escalas, diferencias de gaussianas y búsqueda de extremos) y lo comparará con la implementación de OpenCV.
+
+\section{Evaluación}
+
+La nota que obtenga en esta sesión de laboratorio será la misma que para ambos miembros de la pareja. Los apartados de la práctica serán evaluados como refleja la Tabla \ref{table:evaluacion}.
+
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{|c|c|c|}
+    \hline
+    \textbf{Tarea} & \textbf{Valor} & \textbf{Resultado} \\
+    \hline
+    Pregunta A.1 & 2.0 & \\
+    \hline
+    Pregunta A.2 & 2.0 & \\
+    \hline
+    Pregunta B.1 & 3.0 & \\
+    \hline
+    Pregunta C.1 & 3.0 & \\
+    \hline
+    \textbf{Total} & \textbf{10.0} & \\
+    \hline
+    \end{tabular}
+    \caption{Valoración de los apartados de la práctica.}
+    \label{table:evaluacion}
+\end{table}
