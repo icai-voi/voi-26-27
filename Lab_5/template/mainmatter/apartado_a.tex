@@ -1,0 +1,59 @@
+\chapter{Apartado A: \textbf{Bolsa de palabras}}
+\label{chapter:tarea_a}
+
+
+En este apartado se va a generar una bolsa de palabras a partir de un dataset (descargar de Moodle) de entrenamiento y se evaluará con un dataset de evaluación. Para generar la bolsa de palabras, se seguirán los pasos descritos en las sesiones de teoría:
+
+\begin{enumerate}
+    \item Extracción de descriptores de puntos de interés de las imágenes del dataset.
+    \item Construcción de diccionario de palabras visuales (K-Means).
+    \item Para cada imagen del dataset, generar histograma de ocurrencias de palabras del diccionario.
+    \item Obtener un clasificador utilizando los histogramas de las imágenes del dataset (SVM).
+\end{enumerate}
+
+De esta forma, se comenzará con la carga de las imágenes que compondrán los distintos \textit{datasets} para ser procesadas posteriormente.
+
+\section*{Tarea A.1: Carga de \textit{datasets} de entrenamiento y validación}
+\addcontentsline{toc}{section}{Tarea A.1: Carga de \textit{datasets} de entrenamiento y validación}
+
+Como ayuda, se le proporciona una clase de Python llamada \texttt{Dataset}. Empleando el método \texttt{load()} de esta clase, cargue los \textit{datasets} de entrenamiento y validación.
+
+\section*{Tarea A.2: Extracción de los descriptores}
+\addcontentsline{toc}{section}{Tarea A.2: Extracción de los descriptores}
+
+Una vez cargados los \textit{datasets} se puede proceder a extraer los descriptores de las imágenes que poblarán nuestra bolsa de palabras. Estos descriptores conformarán las ocurrencias de cada característica visual en la bolsa de palabras. Para ello, primero deberá cargar las imágenes del \textit{dataset} de entrenamiento con el \texttt{path} de cada una de ellas y hacerlo en escala de grises. Después, empleando los métodos necesarios de \texttt{OpenCV} que ha visto durante la sesión, genere los descriptores y guárdelos en una lista.
+
+\section*{Tarea A.3: Creación del vocabulario}
+\addcontentsline{toc}{section}{Tarea A.3: Creación del vocabulario}
+
+Con la bolsa de palabras llena con los descriptores, se puede proceder a agrupar los mismos en las distintas palabras del vocabulario que se va a generar. Para ello, se va a ejecutar el algoritmo de clusterización de K-Means que agrupará estos descriptores. En esta tarea debe añadir los descriptores de la lista que obtuvo como resultado en la tarea anterior a la bolsa de palabras \texttt{words} que se inicializa en el código y sobre la que ejecutaremos el algoritmo. Fíjese en que se determina el número de palabras deseadas en el vocabulario final con la variable \texttt{vocabulary\_size} y que esto afectará al desempeño del clasificador más adelante.
+
+\section*{Tarea A.4: Entrenamiento del clasificador}
+\addcontentsline{toc}{section}{Tarea A.4: Entrenamiento del clasificador}
+
+Una vez tenemos las características de las imágenes agrupadas en las palabras, se va a entrenar un clasificador que sea capaz de diferenciar entre estos grupos. Este será un modelo basado en una  \textit{Support Vector Machine}(SVM). Con este clasificador podremos recibir imágenes externas al \textit{dataset} de entrenamiento y clasificarlas en nuestro grupo de palabras.
+
+Para entrenar el clasificador se aporta la clase \texttt{BoW} como ayuda. Añada los argumentos necesarios a los métodos especificados en la celda de código. Compruebe qué argumentos tiene que añadir accediendo al código de la clase proporcionada y analizando los métodos declarados. El modelo final se guardará en el ordenador para su uso más adelante.
+
+\section*{Tarea A.5: Inferencia en el dataset de entrenamiento}
+\addcontentsline{toc}{section}{Tarea A.5: Inferencia en el dataset de entrenamiento}
+
+Con el modelo entrenado, es hora de ver cómo trabaja y comprobar su desempeño. En este caso la métrica empleada será la precisión y podrá observar la matriz de confusión generada para las predicciones.
+
+Al igual que en la tarea anterior, añada los argumentos necesarios a los métodos especificados en la celda de código.
+
+\section*{Tarea A.6: Inferencia en el dataset de validación}
+\addcontentsline{toc}{section}{Tarea A.6: Inferencia en el dataset de validación}
+
+Después de extraer los resultados con el dataset de entrenamiento, se tienen que comparar los mismos con los del dataset de validación donde se debería obtener un desempeño inferior.
+
+Al igual que en la tarea anterior, añada los argumentos necesarios.
+
+
+\section*{Preguntas}
+\addcontentsline{toc}{section}{Preguntas}
+
+
+\begin{tcolorbox}[colback=gray!10, colframe=gray!30, coltitle=black, title=\textbf Pregunta A.1: En busca de los mejores parámetros, halign=left]
+Entrene y evalúe el clasificador con vocabularios de 50, 100, 200 y 400 palabras (vocabulary\_size). Elija además uno de estos parámetros y estudie su efecto: el kernel del SVM  (setKernel() en image\_classifier.py), el numero de iteraciones (argumento iterations de train()) o el extractor de caracteristicas (KAZE en lugar de SIFT). Muestre en una tabla la accuracy de entrenamiento y de validacion de cada prueba y justifique que configuracion elegiria.
+\end{tcolorbox}
