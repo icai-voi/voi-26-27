@@ -25,12 +25,17 @@ The lab session folder is structured as follows:
 
 ```bash
 .
-├── CVI_Lab_4.pdf
+├── CVI_Lab_5.pdf
 ├── src
-│   └── partA-C.ipynb
-│   └── partD.ipynb
+│   ├── bow.py
+│   ├── dataset.py
+│   ├── image_classifier.py
+│   ├── partA.ipynb
+│   ├── partB-D.ipynb
+│   ├── results.py
+│   └── utils.py
 ├── data
-│   └──partA-C
+│   └──partB-D
 │       ├── slow_traffic_small.mp4
 │       └── visiontraffic.avi
 ├── assets
