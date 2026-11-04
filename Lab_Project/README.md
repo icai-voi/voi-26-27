@@ -24,7 +24,7 @@ The folder lab session folder is structured as follows:
 
 ```bash
 .
-├── guide.pdf
+├── Lab_Project.pdf
 ├── src
 │   └── test.py
 ├── assets
