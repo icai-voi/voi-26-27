@@ -16,7 +16,6 @@ This laboratory session contains the following:
 
 - 📄 **Guide**: A ``PDF`` guide with instructions to complete the session (currently only available in Spanish).
 - 💻 **Script**: a ``.ipynb`` or ``.py`` file to complete.
-- 🎞️ **Data**: A folder containing images to process.
 - 📝 **Template**: A folder with a ``latex`` template used to generate the guide. You can reuse it to write your report.
 - 🧩 **Assets**: Files to style or improve documentation.
 - 📖 **README**: With links to motivate the session or to introduce the theory concepts.
