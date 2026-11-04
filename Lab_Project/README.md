@@ -26,13 +26,7 @@ The folder lab session folder is structured as follows:
 .
 ├── guide.pdf
 ├── src
-│   ├── lab_session.ipynb
-│   ├── lab_session.py
-│   └── ...
-├── data
-│   ├── image1.png
-│   ├── image2.png
-│   └── ...
+│   └── test.py
 ├── assets
 ├── template
 └── README
